@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Scripts/">
+    <File Path="init-db.sql" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/ScanEventWorker/ScanEventWorker.csproj" />
+  </Folder>
+</Solution>
