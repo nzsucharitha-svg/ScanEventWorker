@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using ScanEventWorker.Api;
+using ScanEventWorker.Data;
+using ScanEventWorker.Services;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()

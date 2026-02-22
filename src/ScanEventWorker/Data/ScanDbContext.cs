@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ScanEventWorker.Data.Entities;
 
+namespace ScanEventWorker.Data;
+
 public class ScanDbContext : DbContext
 {
     public ScanDbContext(DbContextOptions<ScanDbContext> options) : base(options) { }

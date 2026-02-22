@@ -1,7 +1,9 @@
 ﻿
+using ScanEventWorker.Data;
 using ScanEventWorker.Data.Entities;
 using ScanEventWorker.Dtos;
 
+namespace ScanEventWorker.Services;
 public class ScanProcessor
 {
     private readonly ScanDbContext _db;
@@ -36,7 +38,7 @@ public class ScanProcessor
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed processing EventId {id}", scan.EventId);
+            _logger.LogError(ex,"Failed processing EventId {EventId} ParcelId {ParcelId}",scan.EventId,scan.ParcelId);
         }
     }
 }

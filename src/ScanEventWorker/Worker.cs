@@ -1,5 +1,7 @@
 using ScanEventWorker.Api;
+using ScanEventWorker.Data;
 using ScanEventWorker.Data.Entities;
+using ScanEventWorker.Services;
 
 public class Worker : BackgroundService
 {

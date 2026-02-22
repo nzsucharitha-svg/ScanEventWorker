@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using ScanEventWorker.Dtos;
+using System.Net.Http.Json;
 
 namespace ScanEventWorker.Api;
 
