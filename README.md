@@ -6,6 +6,17 @@ This project is a .NET Worker Service that continuously consumes a Scan Event AP
 
 The service is designed to be fault-tolerant, restart-safe, and production-ready, using batch processing, checkpoint persistence, structured logging, and clean layered architecture.
 
+
+## Why .NET Worker Service?
+
+This application uses .NET Worker Service because it is optimized for:
+- Long-running background tasks
+- Continuous polling workloads
+- High-throughput processing
+- Clean lifecycle management
+- Graceful startup and shutdown
+
+Worker Services are ideal for event ingestion pipelines, schedulers, and background processors.
 ---
 
 ## Key Features
@@ -21,7 +32,17 @@ The service is designed to be fault-tolerant, restart-safe, and production-ready
 ---
 
 ## High-Level Architecture
-Scan Event API ? .NET Worker Service ? SQL Server
+Scan Event API -> .NET Worker Service -> SQL Server
+
+## API Communication Strategy
+
+The worker communicates with the Scan Event API using HttpClientFactory and typed clients.
+
+Key benefits:
+- Connection pooling
+- DNS refresh handling
+- Testability
+- Resilience
 
 
 ### Processing Flow
@@ -42,13 +63,13 @@ Repeat continuously
 
 ## Technical Architecture
 Worker
-?
+   |
 ScanApiClient
-?
+   |
 ScanProcessor
-?
+    |
 Entity Framework Core (DbContext)
-?
+    |
 SQL Server
 
 
@@ -106,7 +127,7 @@ Serilog.Sinks.Console                    | Console logging output
 
 ## Configuration
 
-### appsettings.json
+### appsettings.json 
 
 ```json
 {
@@ -118,12 +139,12 @@ Serilog.Sinks.Console                    | Console logging output
   }
 }
 
-## **Setup Instructions**
+## Setup Instructions
 
 1. Install Dependencies
 dotnet restore
 
-2. Create Database using EF Core
+2. Create Database using EF Core or Run init-db.sql in ScanWorkerDb Database in Sql Server.
 dotnet ef database update
 
 3. Run Worker Service
@@ -142,6 +163,7 @@ dotnet run
   - Events are immutable
   - EventId is strictly increasing
   - API supports pagination using FromEventId + Limit
+  - Moderate Workload
   - At-least-once processing is acceptable
 
 ## Possible Improvements
