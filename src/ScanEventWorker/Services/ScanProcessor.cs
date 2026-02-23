@@ -35,6 +35,7 @@ public class ScanProcessor
                 parcel.DeliveryTimeUtc ??= scan.CreatedDateTimeUtc;
 
             _db.Parcels.Update(parcel);
+            await _db.SaveChangesAsync();
         }
         catch (Exception ex)
         {
