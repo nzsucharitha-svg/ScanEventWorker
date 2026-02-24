@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ScanEventWorker.Api;
 using ScanEventWorker.Data;
 using ScanEventWorker.Data.Entities;
@@ -24,7 +25,7 @@ public class Worker : BackgroundService
             var db = scope.ServiceProvider.GetRequiredService<ScanDbContext>();
             var processor = scope.ServiceProvider.GetRequiredService<ScanProcessor>();
 
-            var state = await db.WorkerStates.FindAsync(1)
+            var state =  await db.WorkerStates.OrderByDescending(x => x.Id).FirstOrDefaultAsync()
                         ?? new WorkerState { Id = 1, LastProcessedEventId = 0 };
 
             var response = await _client.GetEvents(state.LastProcessedEventId + 1, 100, stoppingToken);
