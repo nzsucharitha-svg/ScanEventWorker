@@ -27,6 +27,10 @@ public class Worker : BackgroundService
 
             var state =  await db.WorkerStates.OrderByDescending(x => x.Id).FirstOrDefaultAsync()
                         ?? new WorkerState { Id = 1, LastProcessedEventId = 0 };
+            var parcels = await db.ParcelStates
+    .OrderByDescending(x => x.ParcelId)
+    .FirstOrDefaultAsync();
+
 
             var response = await _client.GetEvents(state.LastProcessedEventId + 1, 100, stoppingToken);
 

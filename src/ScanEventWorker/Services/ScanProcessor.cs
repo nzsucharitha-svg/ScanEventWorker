@@ -19,7 +19,7 @@ public class ScanProcessor
     {
         try
         {
-            var parcel = await _db.Parcels.FindAsync(scan.ParcelId)
+            var parcel = await _db.ParcelStates.FindAsync(scan.ParcelId)
                 ?? new ParcelState { ParcelId = scan.ParcelId };
 
             parcel.LastEventId = scan.EventId;
@@ -34,7 +34,7 @@ public class ScanProcessor
             if (scan.Type == "DELIVERY")
                 parcel.DeliveryTimeUtc ??= scan.CreatedDateTimeUtc;
 
-            _db.Parcels.Update(parcel);
+            _db.ParcelStates.Update(parcel);
             await _db.SaveChangesAsync();
         }
         catch (Exception ex)
